@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,53 +14,56 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Default Route
+// Default Route #DELETE
 Route::get('/welcome', function () {
     return view('welcome');
 });
 
-// General Routes
+// Middleware Auth
+Route::group(['middleware' => 'auth'], function () {
+    // General Routes
 
-Route::get('/', function () {
-    return redirect('/home');
+    Route::get('/', function () {
+        return redirect('/home');
+    });
+
+    Route::get('/home', function () {
+        return view('home');
+    });
+
+    Route::get('/explore', function () {
+        return view('explore');
+    });
+
+    Route::get('/notifications', function () {
+        return view('notifications');
+    });
+
+    Route::get('/messages', function () {
+        return view('messages');
+    });
+
+    Route::get('/bookmarks', function () {
+        return view('bookmarks');
+    });
+
+    // User #TODO
+    Route::get('/user/lists', function () {
+        return view('user.lists');
+    });
+
+    Route::get('/user/{user}', function () {
+        return view('user.profile');
+    });
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
-
-Route::get('/explore', function () {
-    return view('explore');
-});
-
-Route::get('/notifications', function () {
-    return view('notifications');
-});
-
-Route::get('/messages', function () {
-    return view('messages');
-});
-
-Route::get('/bookmarks', function () {
-    return view('bookmarks');
-});
-
-// User
-
-Route::get('/user/lists', function () {
-    return view('user.lists');
-});
-
-Route::get('/user', function () {
-    return view('user.profile');
-});
-
-// Chit
+// Chit #TODO
 
 // Route::get('/compose/chit', function () {
 //     return view('compose');
 // });
 
+// Public Pages
 // Terms Of Service Page
 Route::get('/tos', function () {
     return view('en.tos');

@@ -154,6 +154,10 @@
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 absolute bottom-0">
                                 <h3>User</h3>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf 
+                                    <button type="submit">Sign Out</button>
+                                </form>
                             </li>
                         </div>
                     </a>
