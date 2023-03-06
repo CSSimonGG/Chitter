@@ -34,19 +34,19 @@ Route::get('/welcome', function () {
 Route::get('/', [HomeController::class, 'redirect'])->middleware('auth');
 
 // Home Page
-Route::get('/home', [HomeController::class, 'show'])->middleware('auth');
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 
 // Explore Page
-Route::get('/explore', [ExploreController::class, 'show'])->middleware('auth');
+Route::get('/explore', [ExploreController::class, 'index'])->middleware('auth');
 
 // Notifications
-Route::get('/notifications', [NotificationController::class, 'show'])->middleware('auth');
+Route::get('/notifications', [NotificationController::class, 'index'])->middleware('auth');
 
 // Messages
-Route::get('/messages', [MessageController::class, 'show'])->middleware('auth');
+Route::get('/messages', [MessageController::class, 'index'])->middleware('auth');
 
 // Bookmarks
-Route::get('/bookmarks', [BookmarkController::class, 'show'])->middleware('auth');
+Route::get('/bookmarks', [BookmarkController::class, 'index'])->middleware('auth');
 
 // User #TODO
 Route::get('/user/{name}', [ProfileController::class, 'show'])->middleware('auth');
