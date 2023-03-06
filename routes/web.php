@@ -9,6 +9,7 @@ use App\Http\Controllers\ListController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,36 +29,31 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-// Middleware Auth
-Route::group(['middleware' => 'auth'], function () {
-    // General Routes
-    // Redirect to Home Page
-    Route::get('/', [HomeController::class, 'redirect']);
+// General Routes
+// Redirect to Home Page
+Route::get('/', [HomeController::class, 'redirect'])->middleware('auth');
 
-    // Home Page
-    Route::get('/home', [HomeController::class, 'show']);
+// Home Page
+Route::get('/home', [HomeController::class, 'show'])->middleware('auth');
 
-    // Explore Page
-    Route::get('/explore', [ExploreController::class, 'show']);
+// Explore Page
+Route::get('/explore', [ExploreController::class, 'show'])->middleware('auth');
 
-    // Notifications
-    Route::get('/notifications', [NotificationController::class, 'show']);
+// Notifications
+Route::get('/notifications', [NotificationController::class, 'show'])->middleware('auth');
 
-    // Messages
-    Route::get('/messages', [MessageController::class, 'show']);
+// Messages
+Route::get('/messages', [MessageController::class, 'show'])->middleware('auth');
 
-    // Bookmarks
-    Route::get('/bookmarks', [BookmarkController::class, 'show']);
+// Bookmarks
+Route::get('/bookmarks', [BookmarkController::class, 'show'])->middleware('auth');
 
-    // User #TODO
-    Route::get('/user/{name}', [ProfileController::class, 'show']);
-});
+// User #TODO
+Route::get('/user/{name}', [ProfileController::class, 'show'])->middleware('auth');
 
 // Chit #TODO
 
-// Route::get('/compose/chit', function () {
-//     return view('compose');
-// });
+Route::get('/compose/chit', [PostsController::class, 'create'])->middleware('auth');
 
 // Public Pages
 // Terms Of Service Page

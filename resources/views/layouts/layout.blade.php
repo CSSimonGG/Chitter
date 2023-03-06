@@ -102,7 +102,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="user">
+                    <a href="{{ url('user/' . urlencode(Auth::user()->name)) }}">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
