@@ -1,6 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -22,39 +31,26 @@ Route::get('/welcome', function () {
 // Middleware Auth
 Route::group(['middleware' => 'auth'], function () {
     // General Routes
+    // Redirect to Home Page
+    Route::get('/', [HomeController::class, 'redirect']);
 
-    Route::get('/', function () {
-        return redirect('/home');
-    });
+    // Home Page
+    Route::get('/home', [HomeController::class, 'show']);
 
-    Route::get('/home', function () {
-        return view('home');
-    });
+    // Explore Page
+    Route::get('/explore', [ExploreController::class, 'show']);
 
-    Route::get('/explore', function () {
-        return view('explore');
-    });
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'show']);
 
-    Route::get('/notifications', function () {
-        return view('notifications');
-    });
+    // Messages
+    Route::get('/messages', [MessageController::class, 'show']);
 
-    Route::get('/messages', function () {
-        return view('messages');
-    });
-
-    Route::get('/bookmarks', function () {
-        return view('bookmarks');
-    });
+    // Bookmarks
+    Route::get('/bookmarks', [BookmarkController::class, 'show']);
 
     // User #TODO
-    Route::get('/user/lists', function () {
-        return view('user.lists');
-    });
-
-    Route::get('/user/{user}', function () {
-        return view('user.profile');
-    });
+    Route::get('/user/{name}', [ProfileController::class, 'show']);
 });
 
 // Chit #TODO
@@ -65,16 +61,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 // Public Pages
 // Terms Of Service Page
-Route::get('/tos', function () {
-    return view('en.tos');
-});
+Route::get('/tos', [PolicyController::class, 'tos']);
 
 // Privacy Policy Page
-Route::get('/privacy', function () {
-    return view('en.privacy');
-});
+Route::get('/privacy', [PolicyController::class, 'privacy']);
 
 // Cookie Policy Page
-Route::get('/cookies', function () {
-    return view('en.cookies');
-});
+Route::get('/cookies', [PolicyController::class, 'cookies']);
