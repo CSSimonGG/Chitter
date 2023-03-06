@@ -1,6 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,64 +24,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Default Route
+// Default Route #DELETE
 Route::get('/welcome', function () {
     return view('welcome');
 });
 
 // General Routes
+// Redirect to Home Page
+Route::get('/', [HomeController::class, 'redirect'])->middleware('auth');
 
-Route::get('/', function () {
-    return redirect('/home');
-});
+// Home Page
+Route::get('/home', [HomeController::class, 'show'])->middleware('auth');
 
-Route::get('/home', function () {
-    return view('home');
-});
+// Explore Page
+Route::get('/explore', [ExploreController::class, 'show'])->middleware('auth');
 
-Route::get('/explore', function () {
-    return view('explore');
-});
+// Notifications
+Route::get('/notifications', [NotificationController::class, 'show'])->middleware('auth');
 
-Route::get('/notifications', function () {
-    return view('notifications');
-});
+// Messages
+Route::get('/messages', [MessageController::class, 'show'])->middleware('auth');
 
-Route::get('/messages', function () {
-    return view('messages');
-});
+// Bookmarks
+Route::get('/bookmarks', [BookmarkController::class, 'show'])->middleware('auth');
 
-Route::get('/bookmarks', function () {
-    return view('bookmarks');
-});
+// User #TODO
+Route::get('/user/{name}', [ProfileController::class, 'show'])->middleware('auth');
 
-// User
+// Chit #TODO
 
-Route::get('/user/lists', function () {
-    return view('user.lists');
-});
+Route::get('/compose/chit', [PostsController::class, 'create'])->middleware('auth');
 
-Route::get('/user', function () {
-    return view('user.profile');
-});
-
-// Chit
-
-// Route::get('/compose/chit', function () {
-//     return view('compose');
-// });
-
+// Public Pages
 // Terms Of Service Page
-Route::get('/tos', function () {
-    return view('en.tos');
-});
+Route::get('/tos', [PolicyController::class, 'tos']);
 
 // Privacy Policy Page
-Route::get('/privacy', function () {
-    return view('en.privacy');
-});
+Route::get('/privacy', [PolicyController::class, 'privacy']);
 
 // Cookie Policy Page
-Route::get('/cookies', function () {
-    return view('en.cookies');
-});
+Route::get('/cookies', [PolicyController::class, 'cookies']);

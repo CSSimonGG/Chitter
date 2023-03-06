@@ -86,7 +86,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="/bookmarks">
+                    <a href="bookmarks">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -102,23 +102,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="user/lists">
-                        <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
-                            <li class="p-3 xl:pr-6 my-2 text-xl">
-                                <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
-                                    <g>
-                                        <path
-                                            d="M3 4.5C3 3.12 4.12 2 5.5 2h13C19.88 2 21 3.12 21 4.5v15c0 1.38-1.12 2.5-2.5 2.5h-13C4.12 22 3 20.88 3 19.5v-15zM5.5 4c-.28 0-.5.22-.5.5v15c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-15c0-.28-.22-.5-.5-.5h-13zM16 10H8V8h8v2zm-8 2h8v2H8v-2z">
-                                        </path>
-                                    </g>
-                                </svg>
-                                <span class="max-xl:hidden">
-                                    &nbsp;&nbsp;&nbsp;Lists
-                                </span>
-                            </li>
-                        </div>
-                    </a>
-                    <a href="user">
+                    <a href="{{ url('user/' . urlencode(Auth::user()->name)) }}">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -154,6 +138,10 @@
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 absolute bottom-0">
                                 <h3>User</h3>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit">Sign Out</button>
+                                </form>
                             </li>
                         </div>
                     </a>
