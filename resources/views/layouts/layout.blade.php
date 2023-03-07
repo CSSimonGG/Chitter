@@ -12,7 +12,7 @@
 
 <body>
     <div class="grid md:grid-cols-12">
-        <header class="xl:col-span-3 max-xl:col-span-1 max-lg:col-span-2 max-md:hidden xl:px-6">
+        <header class="xl:col-span-4 max-xl:col-span-1 max-lg:col-span-2 max-md:hidden xl:px-6">
             <nav class="flex justify-end">
                 <ul class="text-start max-xl:mr-4">
                     <a href="home">
@@ -148,10 +148,10 @@
                 </ul>
             </nav>
         </header>
-        <main class="xl:col-span-5 max-xl:col-span-7 max-lg:col-span-10 md:border-x-2 max-lg:pr-8">
+        <main class="xl:col-span-4 max-xl:col-span-8 max-lg:col-span-10 md:border-x-2 max-lg:pr-8">
             @yield('content')
         </main>
-        <div class="lg:col-span-4 max-lg:hidden px-6">
+        <div class="xl:col-span-4 max-xl:col-span-3 max-lg:hidden px-6">
             <div>
                 <footer class="text-gray-500 text-xs">
                     <a href="tos">

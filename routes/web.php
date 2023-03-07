@@ -52,8 +52,9 @@ Route::get('/bookmarks', [BookmarkController::class, 'index'])->middleware('auth
 Route::get('/user/{name}', [ProfileController::class, 'show'])->middleware('auth');
 
 // Chit #TODO
+Route::post('/create', [PostsController::class, 'create']);
 
-Route::get('/compose/chit', [PostsController::class, 'create'])->middleware('auth');
+Route::get('/compose/chit', [PostsController::class, 'show'])->middleware('auth');
 
 // Public Pages
 // Terms Of Service Page
