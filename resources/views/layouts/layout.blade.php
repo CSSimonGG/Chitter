@@ -148,7 +148,7 @@
                 </ul>
             </nav>
         </header>
-        <main class="xl:col-span-4 max-xl:col-span-8 max-lg:col-span-10 md:border-x-2 max-lg:pr-8">
+        <main class="xl:col-span-4 max-xl:col-span-8 max-lg:col-span-10 max-lg:pr-8">
             @yield('content')
         </main>
         <div class="xl:col-span-4 max-xl:col-span-3 max-lg:hidden px-6">
@@ -167,6 +167,7 @@
                 </footer>
             </div>
         </div>
+        @vite('/resources/js/app.js')
 </body>
 
 </html>
