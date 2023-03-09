@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="/Chitter/public/redtwitterlogo.png">
     @vite('resources/css/app.css')
+    <script src="{{ asset('js/app.js') }}"></script>
     <title>@yield('title') - Chitter</title>
 </head>
 
@@ -118,22 +119,23 @@
                             </li>
                         </div>
                     </a>
-                    <a href="compose/chit">
-                        <div class="max-xl:hidden text-center rounded-full bg-red-500 hover:bg-red-600">
-                            <li class="px-20 py-3 mt-6 text-xl text-white font-medium">Chit</li>
-                        </div>
-                        <div class="xl:hidden w-fit bg-red-500 rounded-full fill-white">
-                            <li class="p-3 mt-6">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="w-7 inline">
-                                    <g>
-                                        <path
-                                            d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z">
-                                        </path>
-                                    </g>
-                                </svg>
-                            </li>
-                        </div>
-                    </a>
+                    {{-- <a href="compose/chit"> --}}
+                    <div onclick="showPopupMenu()"
+                        class="max-xl:hidden text-center rounded-full bg-red-500 hover:bg-red-600">
+                        <li class="px-20 py-3 mt-6 text-xl text-white font-medium">Chit</li>
+                    </div>
+                    <div class="xl:hidden w-fit bg-red-500 rounded-full fill-white">
+                        <li class="p-3 mt-6">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="w-7 inline">
+                                <g>
+                                    <path
+                                        d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </li>
+                    </div>
+                    {{-- </a> --}}
                     <a href="">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 absolute bottom-0">
@@ -149,6 +151,11 @@
             </nav>
         </header>
         <main class="xl:col-span-4 max-xl:col-span-8 max-lg:col-span-10 max-lg:pr-8">
+            <div class="hidden" id="popupMenu">
+                <div class="absolute">
+                    <x-createchit />
+                </div>
+            </div>
             @yield('content')
         </main>
         <div class="xl:col-span-4 max-xl:col-span-3 max-lg:hidden px-6">
@@ -167,7 +174,6 @@
                 </footer>
             </div>
         </div>
-        @vite('/resources/js/app.js')
 </body>
 
 </html>
