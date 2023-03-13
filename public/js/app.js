@@ -13,5 +13,13 @@ function showPopupMenu() {
 }
 function closePopupMenu() {
     showPopupMenu();
-    console.log("test");
+}
+
+function showChitOptions(id) {
+    var chitOptions = document.getElementById("chitOptions_" + id);
+    if (chitOptions.style.display === "none") {
+        chitOptions.style.display = "block";
+    } else {
+        chitOptions.style.display = "none";
+    }
 }

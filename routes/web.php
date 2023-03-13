@@ -51,8 +51,11 @@ Route::get('/bookmarks', [BookmarkController::class, 'index'])->middleware('auth
 // User #TODO
 Route::get('/user/{name}', [ProfileController::class, 'show'])->middleware('auth');
 
-// Chit #TODO
+// Chit Create
 Route::post('/create', [PostsController::class, 'create']);
+
+// Chit Delete
+Route::delete('/delete/{post}', [PostsController::class, 'destroy']);
 
 Route::get('/compose/chit', [PostsController::class, 'show'])->middleware('auth');
 

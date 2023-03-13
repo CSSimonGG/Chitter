@@ -1,13 +1,18 @@
 <div>
-    <div class="hover:bg-gray-100 py-3 px-6 border-x border-t">
+    <div class="relative hover:bg-gray-100 py-3 px-6 border-x border-t">
         <h2 class="inline font-bold">{{ $post->user->name }}</h2>
         <p class="inline">- {{ $post->created_at->diffForHumans() }}</p>
-        <x-buttons.options/>
+        <div class="inline" onclick="showChitOptions({{ $post->id }})">
+            <x-buttons.options />
+        </div>
+        <div style="display: none;" id="chitOptions_{{ $post->id }}" class="absolute right-1 bg-white rounded-lg p-3">
+            <x-menu.chitoptions :post="$post" />
+        </div>
         <p class="break-words">{{ $post->chit }}</p>
         <div class="pt-3 pb-6 space-x-12">
-            <x-buttons.comment/>
-            <x-buttons.repost/>
-            <x-buttons.like/>
+            <x-buttons.comment />
+            <x-buttons.repost />
+            <x-buttons.like />
         </div>
     </div>
 </div>

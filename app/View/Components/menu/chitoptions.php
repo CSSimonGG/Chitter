@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\buttons;
+namespace App\View\Components\menu;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class comment extends Component
+class chitoptions extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class comment extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.buttons.comment');
+        return view('components.menu.chitoptions');
     }
 }

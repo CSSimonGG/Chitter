@@ -27,4 +27,12 @@ class PostsController extends Controller
     {
         abort(404);
     }
+    public function destroy(Post $post) {
+        // Make sure logged in user is owner
+        if($post->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
+        $post->delete();
+        return redirect('/');
+    }
 }
