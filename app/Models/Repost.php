@@ -4,22 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
-class Post extends Model
+class Repost extends Model
 {
     use HasFactory;
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function likes()
+
+    public function post()
     {
-        return $this->hasMany(Like::class);
-    }
-    public function reposts()
-    {
-        return $this->hasMany(Repost::class);
+        return $this->belongsTo(Post::class);
     }
 }

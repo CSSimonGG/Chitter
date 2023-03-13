@@ -34,7 +34,7 @@ Route::get('/welcome', function () {
 Route::get('/', [HomeController::class, 'redirect'])->middleware('auth');
 
 // Home Page
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/home', [PostsController::class, 'show'])->middleware('auth');
 
 // Explore Page
 Route::get('/explore', [ExploreController::class, 'index'])->middleware('auth');

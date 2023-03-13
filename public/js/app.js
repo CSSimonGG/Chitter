@@ -23,3 +23,13 @@ function showChitOptions(id) {
         chitOptions.style.display = "none";
     }
 }
+
+function addNewLike() {
+    var postId = $(this).data('post-id');
+
+    // Make an AJAX POST request to the server to insert the new like
+    $.post('/posts/' + postId + '/like', function(data) {
+        // Update the number of likes on the page
+        $('.like-count[data-post-id="' + postId + '"]').text(data.count);
+    });
+}

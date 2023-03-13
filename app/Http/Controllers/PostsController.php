@@ -23,13 +23,17 @@ class PostsController extends Controller
 
         return redirect('home');
     }
-    public function show()
+    public function show(Post $post)
     {
-        abort(404);
+        $posts = Post::all();
+        // $likesCount = $post->likes()->count();
+        // $repostsCount = $post->reposts()->count();
+        return view('home', ['posts' => $posts]);
     }
-    public function destroy(Post $post) {
+    public function destroy(Post $post)
+    {
         // Make sure logged in user is owner
-        if($post->user_id != auth()->id()) {
+        if ($post->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
         $post->delete();

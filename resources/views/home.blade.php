@@ -9,7 +9,6 @@
     </div>
 
     {{-- Show all Posts --}}
-
     @foreach ($posts->sortByDesc('created_at') as $post)
         <x-chit :post="$post" />
     @endforeach
