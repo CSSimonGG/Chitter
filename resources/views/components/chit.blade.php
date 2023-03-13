@@ -1,3 +1,4 @@
+{{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 <div>
     <div class="relative hover:bg-gray-100 py-3 px-6 border-x border-t">
         <h2 class="inline font-bold">{{ $post->user->name }}</h2>
@@ -10,19 +11,22 @@
         </div>
         <p class="break-words">{{ $post->chit }}</p>
         <div class="flex pt-3 pb-6 space-x-12">
-            <div class="flex items-center">
+            <div onclick="addNewComment({{ $post->id }})" id="chitComments_{{ $post->id }}"
+                class="flex items-center">
                 <x-buttons.comment />
                 <div>
                     1
                 </div>
             </div>
-            <div class="flex items-center">
+            <div onclick="addNewRepost({{ $post->id }})" id="chitReposts_{{ $post->id }}"
+                class="flex items-center">
                 <x-buttons.repost :post="$post" />
                 <div class="">
                     {{ $post->reposts()->count() }}
                 </div>
             </div>
-            <div class="flex items-center">
+            <div onclick="addNewLike({{ $post->id }})" id="chitLikes_{{ $post->id }}"
+                class="flex items-center">
                 <x-buttons.like :post="$post" />
                 <div class="">
                     {{ $post->likes()->count() }}

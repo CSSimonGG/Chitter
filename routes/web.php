@@ -57,7 +57,11 @@ Route::post('/create', [PostsController::class, 'create']);
 // Chit Delete
 Route::delete('/delete/{post}', [PostsController::class, 'destroy']);
 
-Route::get('/compose/chit', [PostsController::class, 'show'])->middleware('auth');
+// Chit Like
+Route::post('/likes/add', [LikeController::class, 'addLike'])->name('likes.add');
+
+// Popup
+// Route::get('/compose/chit', [PostsController::class, 'show'])->middleware('auth');
 
 // Public Pages
 // Terms Of Service Page
