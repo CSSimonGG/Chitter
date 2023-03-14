@@ -2,26 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Like;
-use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Http\Requests\LikeRequest;
+use App\Http\Requests\UnlikeRequest;
 
 class LikesController extends Controller
 {
-    public function addLike(Request $request)
+    public function like(LikeRequest $request)
     {
-        // Get the post ID from the request
-        $postId = $request->input('post_id');
+        $request->user()->like($request->likeable());
 
-        // Add a like for the post in the database
-        $post = Post::findOrFail($postId);
-        $like = new Like();
-        $post->likes()->save($like);
+        if ($request->ajax()) {
+            return response()->json([
+                'likes' => $request->likeable()->likes()->count(),
+            ]);
+        }
 
-        // Get the updated number of likes for the post
-        $likesCount = $post->likes()->count();
+        return redirect()->back();
+    }
 
-        // Return a JSON response with the updated number of likes
-        return response()->json(['likes_count' => $likesCount]);
+    public function unlike(UnlikeRequest $request)
+    {
+        $request->user()->unlike($request->likeable());
+
+        if ($request->ajax()) {
+            return response()->json([
+                'likes' => $request->likeable()->likes()->count(),
+            ]);
+        }
+
+        return redirect()->back();
     }
 }

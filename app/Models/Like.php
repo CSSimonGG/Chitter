@@ -11,11 +11,11 @@ class Like extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault();
     }
 
-    public function post()
+    public function likeable()
     {
-        return $this->belongsTo(Post::class);
+        return $this->morphTo();
     }
 }

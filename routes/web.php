@@ -11,6 +11,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -52,13 +53,14 @@ Route::get('/bookmarks', [BookmarkController::class, 'index'])->middleware('auth
 Route::get('/user/{name}', [ProfileController::class, 'show'])->middleware('auth');
 
 // Chit Create
-Route::post('/create', [PostsController::class, 'create']);
+Route::post('/create', [PostsController::class, 'create'])->middleware('auth');
 
 // Chit Delete
-Route::delete('/delete/{post}', [PostsController::class, 'destroy']);
+Route::delete('/delete/{post}', [PostsController::class, 'destroy'])->middleware('auth');
 
-// Chit Like
-Route::post('/likes/add', [LikeController::class, 'addLike'])->name('likes.add');
+// Chit Like and Unlike
+Route::post('like', [LikesController::class, 'like'])->name('like')->middleware('auth');
+Route::delete('like', [LikesController::class, 'unlike'])->name('unlike')->middleware('auth');
 
 // Popup
 // Route::get('/compose/chit', [PostsController::class, 'show'])->middleware('auth');

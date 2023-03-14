@@ -10,7 +10,7 @@
             <x-menu.chitoptions :post="$post" />
         </div>
         <p class="break-words">{{ $post->chit }}</p>
-        <div class="flex pt-3 pb-6 space-x-12">
+        {{-- <div class="flex pt-3 pb-6 space-x-12">
             <div onclick="addNewComment({{ $post->id }})" id="chitComments_{{ $post->id }}"
                 class="flex items-center">
                 <x-buttons.comment />
@@ -32,6 +32,7 @@
                     {{ $post->likes()->count() }}
                 </div>
             </div>
-        </div>
+        </div> --}}
+        <div>@include('like', ['model' => $post])</div>
     </div>
 </div>
