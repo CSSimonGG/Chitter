@@ -10,29 +10,7 @@
             <x-menu.chitoptions :post="$post" />
         </div>
         <p class="break-words">{{ $post->chit }}</p>
-        {{-- <div class="flex pt-3 pb-6 space-x-12">
-            <div onclick="addNewComment({{ $post->id }})" id="chitComments_{{ $post->id }}"
-                class="flex items-center">
-                <x-buttons.comment />
-                <div>
-                    1
-                </div>
-            </div>
-            <div onclick="addNewRepost({{ $post->id }})" id="chitReposts_{{ $post->id }}"
-                class="flex items-center">
-                <x-buttons.repost :post="$post" />
-                <div class="">
-                    {{ $post->reposts()->count() }}
-                </div>
-            </div>
-            <div onclick="addNewLike({{ $post->id }})" id="chitLikes_{{ $post->id }}"
-                class="flex items-center">
-                <x-buttons.like :post="$post" />
-                <div class="">
-                    {{ $post->likes()->count() }}
-                </div>
-            </div>
-        </div> --}}
+        {{-- Likes --}}
         <div>@include('like', ['model' => $post])</div>
     </div>
 </div>

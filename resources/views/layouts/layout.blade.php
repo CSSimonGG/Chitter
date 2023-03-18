@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="/Chitter/public/redtwitterlogo.png">
+    {{-- CSS --}}
     @vite('resources/css/app.css')
+    {{-- JS --}}
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- JQuere -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- Title --}}
     <title>@yield('title') - Chitter</title>
 </head>
 
@@ -183,6 +188,39 @@
                 </footer>
             </div>
         </div>
+        <script>
+            $(function() {
+                console.log('Document ready2!');
+                $('.like-form, .unlike-form').on('submit', function(e) {
+                    e.preventDefault();
+                    var $form = $(this);
+                    var data = $form.serialize();
+                    var url = $form.attr('action');
+                    var method = $form.attr('method');
+                    $.ajax({
+                        url: url,
+                        method: method,
+                        data: data,
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log("succes");
+                            var likes = form.find('.likes');
+                            likes.text(response.likes);
+                            var likeButton = form.find('.like-button');
+                            var unlikeButton = form.find('.unlike-button');
+                            if (response.liked) {
+                                likeButton.hide();
+                                unlikeButton.show();
+                            } else {
+                                likeButton.show();
+                                unlikeButton.hide();
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+
 </body>
 
 </html>

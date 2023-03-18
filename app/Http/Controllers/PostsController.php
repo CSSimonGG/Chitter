@@ -26,8 +26,6 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         $posts = Post::all();
-        // $likesCount = $post->likes()->count();
-        // $repostsCount = $post->reposts()->count();
         return view('home', ['posts' => $posts]);
     }
     public function destroy(Post $post)

@@ -9,6 +9,7 @@ class LikesController extends Controller
 {
     public function like(LikeRequest $request)
     {
+        // dd($request);
         $request->user()->like($request->likeable());
 
         if ($request->ajax()) {

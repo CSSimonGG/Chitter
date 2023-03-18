@@ -59,8 +59,8 @@ Route::post('/create', [PostsController::class, 'create'])->middleware('auth');
 Route::delete('/delete/{post}', [PostsController::class, 'destroy'])->middleware('auth');
 
 // Chit Like and Unlike
-Route::post('like', [LikesController::class, 'like'])->name('like')->middleware('auth');
-Route::delete('like', [LikesController::class, 'unlike'])->name('unlike')->middleware('auth');
+Route::post('like', [LikesController::class, 'like'])->name('like');
+Route::delete('like', [LikesController::class, 'unlike'])->name('unlike');
 
 // Popup
 // Route::get('/compose/chit', [PostsController::class, 'show'])->middleware('auth');
