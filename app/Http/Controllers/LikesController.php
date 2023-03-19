@@ -9,16 +9,14 @@ class LikesController extends Controller
 {
     public function like(LikeRequest $request)
     {
-        // dd($request);
         $request->user()->like($request->likeable());
 
         if ($request->ajax()) {
             return response()->json([
                 'likes' => $request->likeable()->likes()->count(),
+                'liked' => true,
             ]);
         }
-
-        return redirect()->back();
     }
 
     public function unlike(UnlikeRequest $request)
@@ -28,9 +26,8 @@ class LikesController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'likes' => $request->likeable()->likes()->count(),
+                'liked' => false,
             ]);
         }
-
-        return redirect()->back();
     }
 }

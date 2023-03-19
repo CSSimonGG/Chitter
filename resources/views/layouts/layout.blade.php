@@ -203,17 +203,23 @@
                         data: data,
                         dataType: 'json',
                         success: function(response) {
-                            console.log("succes");
-                            var likes = form.find('.likes');
+                            console.log("success");
+                            var likes = $form.find('.likes');
                             likes.text(response.likes);
-                            var likeButton = form.find('.like-button');
-                            var unlikeButton = form.find('.unlike-button');
+
+                            // Check if user is authorized to like/unlike and update form
                             if (response.liked) {
-                                likeButton.hide();
-                                unlikeButton.show();
+                                $form.removeClass('like-form').addClass('unlike-form');
+                                $form.attr('action', response.unlike_url);
+                                $form.attr('method', 'DELETE');
+                                $form.find('input[name="_method"]').val('DELETE');
+                                $form.find('button[type="submit"]').text('Unlike');
                             } else {
-                                likeButton.show();
-                                unlikeButton.hide();
+                                $form.removeClass('unlike-form').addClass('like-form');
+                                $form.attr('action', response.like_url);
+                                $form.attr('method', 'POST');
+                                $form.find('input[name="_method"]').val('POST');
+                                $form.find('button[type="submit"]').text('Like');
                             }
                         }
                     });

@@ -1,4 +1,3 @@
-{{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 <div>
     <div class="relative hover:bg-gray-100 py-3 px-6 border-x border-t">
         <h2 class="inline font-bold">{{ $post->user->name }}</h2>
