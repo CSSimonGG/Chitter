@@ -23,7 +23,14 @@
             </div>
             <div>
                 @foreach ($posts->sortByDesc('created_at') as $post)
-                    @if ($post->user_id == Auth::user()->id)
+                    @if ($post->user_id == $user->id)
+                        <x-chit :post="$post" />
+                    @endif
+                @endforeach
+                <h1 class="border">Likes</h1>
+                {{-- #TODO sort by date when liked  --}}
+                @foreach ($posts->sortByDesc('created_at') as $post)
+                    @if ($post->likes->contains('user_id', Auth::user()->id))
                         <x-chit :post="$post" />
                     @endif
                 @endforeach
