@@ -213,13 +213,13 @@
                                 $form.attr('action', response.unlike_url);
                                 $form.attr('method', 'DELETE');
                                 $form.find('input[name="_method"]').val('DELETE');
-                                $form.find('button[type="submit"]').text('Unlike');
+                                $form.find('button[type="submit"]').addClass('fill-red-600');
                             } else {
                                 $form.removeClass('unlike-form').addClass('like-form');
                                 $form.attr('action', response.like_url);
                                 $form.attr('method', 'POST');
                                 $form.find('input[name="_method"]').val('POST');
-                                $form.find('button[type="submit"]').text('Like');
+                                $form.find('button[type="submit"]').removeClass('fill-red-600');
                             }
                         }
                     });
