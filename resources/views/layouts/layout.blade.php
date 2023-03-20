@@ -34,14 +34,14 @@
         <header class="xl:col-span-4 max-xl:col-span-1 max-lg:col-span-2 max-md:hidden xl:px-6">
             <nav class="flex justify-end">
                 <ul class="text-start max-xl:mr-4">
-                    <a href="home">
+                    <a href="/home">
                         <div class="w-fit mt-1 hover:bg-red-100 ease-in-out duration-200 rounded-full">
                             <li class="p-3">
                                 <img class="w-8" src="redtwitterlogo.png" alt="Chitter">
                             </li>
                         </div>
                     </a>
-                    <a href="home">
+                    <a href="/home">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -57,7 +57,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="explore">
+                    <a href="/explore">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -73,7 +73,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="notifications">
+                    <a href="/notifications">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -89,7 +89,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="messages">
+                    <a href="/messages">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -105,7 +105,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="bookmarks">
+                    <a href="/bookmarks">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -121,7 +121,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="{{ url('user/' . urlencode(Auth::user()->name)) }}">
+                    <a href="{{ url('/user/' . urlencode(Auth::user()->name)) }}">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -137,7 +137,6 @@
                             </li>
                         </div>
                     </a>
-                    {{-- <a href="compose/chit"> --}}
                     <div onclick="showPopupMenu()">
                         <div class="max-xl:hidden text-center rounded-full bg-red-500 hover:bg-red-600">
                             <li class="px-20 py-3 mt-6 text-xl text-white font-medium">Chit</li>
@@ -154,18 +153,19 @@
                             </li>
                         </div>
                     </div>
-                    {{-- </a> --}}
-                    <a href="">
-                        <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
-                            <li class="p-3 xl:pr-6 absolute bottom-0">
-                                <h3>User</h3>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit">Sign Out</button>
-                                </form>
-                            </li>
-                        </div>
-                    </a>
+                    <div class="w-fit">
+                        <li
+                            class="px-6 py-2 xl:pr-6 absolute bottom-0 hover:bg-gray-200 ease-in-out duration-200 rounded-full">
+                            <a class="text-lg"
+                                href="{{ url('/user/' . urlencode(Auth::user()->name)) }}">{{ Str::limit(Auth::user()->name, 20, $end = '...') }}</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit">
+                                    <p class="text-red-600">Sign Out</p>
+                                </button>
+                            </form>
+                        </li>
+                    </div>
                 </ul>
             </nav>
         </header>
