@@ -7,6 +7,8 @@ Chitter is a Twitter Clone side project
 -   Laravel
 -   Fortify
 -   TailwindCSS
+-   JavaScript
+-   Jquery & Ajax
 
 ## About Laravel
 
