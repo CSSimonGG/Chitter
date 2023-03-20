@@ -1,6 +1,6 @@
 <div>
-    <div class="relative hover:bg-gray-100 py-3 px-6 border-x border-t">
-        <h2 class="inline font-bold">{{ $post->user->name }}</h2>
+    <div class="relative hover:bg-gray-100 py-3 px-6 border-t">
+        <h2 class="inline font-bold">{{ Str::limit($post->user->name, 40, $end = '...') }}</h2>
         <p class="inline">- {{ $post->created_at->diffForHumans() }}</p>
         <div class="inline" onclick="showChitOptions({{ $post->id }})">
             <x-buttons.options />

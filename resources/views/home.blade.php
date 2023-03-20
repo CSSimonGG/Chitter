@@ -3,8 +3,8 @@
 @section('title', 'Home')
 
 @section('content')
-    <h1 class="px-6 py-3 font-bold text-xl border-b border-x">Home</h1>
-    <div class="py-3 border-x">
+    <h1 class="px-6 py-3 font-bold text-xl border-b">Home</h1>
+    <div class="py-3">
         <x-createchit />
     </div>
 

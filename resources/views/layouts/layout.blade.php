@@ -156,7 +156,7 @@
                     <div class="w-fit">
                         <li
                             class="px-6 py-2 xl:pr-6 absolute bottom-0 hover:bg-gray-200 ease-in-out duration-200 rounded-full">
-                            <a class="text-lg"
+                            <a class="text-lg font-semibold"
                                 href="{{ url('/user/' . urlencode(Auth::user()->name)) }}">{{ Str::limit(Auth::user()->name, 20, $end = '...') }}</a>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -169,7 +169,7 @@
                 </ul>
             </nav>
         </header>
-        <main class="xl:col-span-4 max-xl:col-span-8 max-lg:col-span-10 max-lg:pr-8">
+        <main class="xl:col-span-4 max-xl:col-span-8 max-lg:col-span-10 max-lg:pr-8 border-x-2">
             @yield('content')
         </main>
         <div class="xl:col-span-4 max-xl:col-span-3 max-lg:hidden px-6">
