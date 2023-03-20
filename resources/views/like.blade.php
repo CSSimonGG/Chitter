@@ -10,7 +10,7 @@
         <button type="submit">
             <x-buttons.liked />
         </button>
-        <span class="likes">{{ $model->likes()->count() }}</span>
+        <span class="likes mt-2">{{ $model->likes()->count() }}</span>
     </form>
 @elseif(auth()->check() &&
         auth()->user()->can('unlike', $model))
@@ -24,7 +24,7 @@
         <button type="submit" class="fill-red-600">
             <x-buttons.liked />
         </button>
-        <span class="likes pt-1">{{ $model->likes()->count() }}</span>
+        <span class="likes mt-2">{{ $model->likes()->count() }}</span>
     </form>
 @else
     <span>Like</span>
