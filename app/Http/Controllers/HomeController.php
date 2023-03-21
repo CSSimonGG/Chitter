@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
-    public function show()
-    {
-        return view('home');
-    }
     public function redirect()
     {
         return redirect('home');
+    }
+
+    public function index()
+    {
+        $posts = Post::all();
+
+        return view('home', ['posts' => $posts]);
     }
 }

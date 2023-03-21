@@ -6,23 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="/Chitter/public/redtwitterlogo.png">
+    {{-- CSS --}}
     @vite('resources/css/app.css')
+    {{-- JS --}}
+    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- Title --}}
     <title>@yield('title') - Chitter</title>
 </head>
 
 <body>
+    <div style="display: none;" id="popupMenu">
+        <div onclick="closePopupMenu()" class="z-40 fixed w-full h-full bg-bg-gray-transparant">
+
+        </div>
+        <div class="flex justify-center">
+            <div class="z-50 fixed top-32 w-[30rem] bg-white rounded-2xl pb-4">
+                <div onclick="closePopupMenu()" class="pl-3 pt-4">
+                    <x-buttons.close />
+                </div>
+                <x-createchit />
+            </div>
+        </div>
+    </div>
     <div class="grid md:grid-cols-12">
-        <header class="xl:col-span-3 max-xl:col-span-1 max-lg:col-span-2 max-md:hidden xl:px-6">
+        <header class="xl:col-span-4 max-xl:col-span-1 max-lg:col-span-2 max-md:hidden xl:px-6">
             <nav class="flex justify-end">
                 <ul class="text-start max-xl:mr-4">
-                    <a href="home">
+                    <a href="/home">
                         <div class="w-fit mt-1 hover:bg-red-100 ease-in-out duration-200 rounded-full">
                             <li class="p-3">
                                 <img class="w-8" src="redtwitterlogo.png" alt="Chitter">
                             </li>
                         </div>
                     </a>
-                    <a href="home">
+                    <a href="/home">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -38,7 +57,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="explore">
+                    <a href="/explore">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -54,7 +73,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="notifications">
+                    <a href="/notifications">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -70,7 +89,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="messages">
+                    <a href="/messages">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -86,7 +105,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="bookmarks">
+                    <a href="/bookmarks">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -102,7 +121,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="{{ url('user/' . urlencode(Auth::user()->name)) }}">
+                    <a href="{{ url('/user/' . urlencode(Auth::user()->name)) }}">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
                                 <svg class="w-7 inline" viewBox="0 0 24 24" aria-hidden="true">
@@ -118,7 +137,7 @@
                             </li>
                         </div>
                     </a>
-                    <a href="compose/chit">
+                    <div onclick="showPopupMenu()">
                         <div class="max-xl:hidden text-center rounded-full bg-red-500 hover:bg-red-600">
                             <li class="px-20 py-3 mt-6 text-xl text-white font-medium">Chit</li>
                         </div>
@@ -133,40 +152,89 @@
                                 </svg>
                             </li>
                         </div>
-                    </a>
-                    <a href="">
-                        <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
-                            <li class="p-3 xl:pr-6 absolute bottom-0">
-                                <h3>User</h3>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit">Sign Out</button>
-                                </form>
-                            </li>
-                        </div>
-                    </a>
+                    </div>
+                    <div class="w-fit">
+                        <li
+                            class="px-6 py-2 xl:pr-6 absolute bottom-0 hover:bg-gray-200 ease-in-out duration-200 rounded-full">
+                            <a class="text-lg font-semibold"
+                                href="{{ url('/user/' . urlencode(Auth::user()->name)) }}">{{ Str::limit(Auth::user()->name, 20, $end = '...') }}</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit">
+                                    <p class="text-red-600">Sign Out</p>
+                                </button>
+                            </form>
+                        </li>
+                    </div>
                 </ul>
             </nav>
         </header>
-        <main class="xl:col-span-5 max-xl:col-span-7 max-lg:col-span-10 md:border-x-2 max-lg:pr-8">
+        <main class="xl:col-span-4 max-xl:col-span-8 max-lg:col-span-10 max-lg:pr-8 border-x-2">
             @yield('content')
         </main>
-        <div class="lg:col-span-4 max-lg:hidden px-6">
+        <div class="xl:col-span-4 max-xl:col-span-3 max-lg:hidden px-6">
             <div>
                 <footer class="text-gray-500 text-xs">
-                    <a href="tos">
+                    <a href="/tos">
                         <span class="pr-4">Terms of Service</span>
                     </a>
-                    <a href="privacy">
+                    <a href="/privacy">
                         <span class="pr-4">Privacy Policy</span>
                     </a>
-                    <a href="cookies">
+                    <a href="/cookies">
                         <span>Cookie Policy</span>
                     </a>
                     <h3>© 2023 Chitter, Simon de Klerk</h3>
                 </footer>
             </div>
         </div>
+        <script>
+            $(function() {
+                console.log('Document ready2!');
+                // Like and Unlike functionality
+                $('.like-form, .unlike-form').on('submit', function(e) {
+                    e.preventDefault();
+                    var $form = $(this);
+                    var data = $form.serialize();
+                    var url = $form.attr('action');
+                    var method = $form.attr('method');
+                    $.ajax({
+                        url: url,
+                        method: method,
+                        data: data,
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log("success");
+                            var likes = $form.find('.likes');
+                            likes.text(response.likes);
+
+                            // Check if user is authorized to like/unlike and update form
+                            if (response.liked) {
+                                $form.removeClass('like-form').addClass('unlike-form');
+                                $form.attr('action', response.unlike_url);
+                                $form.attr('method', 'DELETE');
+                                $form.find('input[name="_method"]').val('DELETE');
+                                $form.find('button[type="submit"]').addClass('fill-red-600');
+                            } else {
+                                $form.removeClass('unlike-form').addClass('like-form');
+                                $form.attr('action', response.like_url);
+                                $form.attr('method', 'POST');
+                                $form.find('input[name="_method"]').val('POST');
+                                $form.find('button[type="submit"]').removeClass('fill-red-600');
+                            }
+                        }
+                    });
+                });
+                // Profile Sections
+                var sections = $("section");
+                $("#nav li").click(function() {
+                    var index = $(this).index();
+                    sections.not(":eq(" + index + ")").hide();
+                    sections.eq(index).show();
+                });
+            });
+        </script>
+
 </body>
 
 </html>

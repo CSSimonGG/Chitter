@@ -1,17 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ListController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,26 +33,35 @@ Route::get('/welcome', function () {
 Route::get('/', [HomeController::class, 'redirect'])->middleware('auth');
 
 // Home Page
-Route::get('/home', [HomeController::class, 'show'])->middleware('auth');
+Route::get('/home', [PostsController::class, 'show'])->middleware('auth');
 
 // Explore Page
-Route::get('/explore', [ExploreController::class, 'show'])->middleware('auth');
+Route::get('/explore', [ExploreController::class, 'index'])->middleware('auth');
 
 // Notifications
-Route::get('/notifications', [NotificationController::class, 'show'])->middleware('auth');
+Route::get('/notifications', [NotificationController::class, 'index'])->middleware('auth');
 
 // Messages
-Route::get('/messages', [MessageController::class, 'show'])->middleware('auth');
+Route::get('/messages', [MessageController::class, 'index'])->middleware('auth');
 
 // Bookmarks
-Route::get('/bookmarks', [BookmarkController::class, 'show'])->middleware('auth');
+Route::get('/bookmarks', [BookmarkController::class, 'index'])->middleware('auth');
 
 // User #TODO
 Route::get('/user/{name}', [ProfileController::class, 'show'])->middleware('auth');
 
-// Chit #TODO
+// Chit Create
+Route::post('/create', [PostsController::class, 'create'])->middleware('auth');
 
-Route::get('/compose/chit', [PostsController::class, 'create'])->middleware('auth');
+// Chit Delete
+Route::delete('/delete/{post}', [PostsController::class, 'destroy'])->middleware('auth');
+
+// Chit Like and Unlike
+Route::post('like', [LikesController::class, 'like'])->name('like');
+Route::delete('like', [LikesController::class, 'unlike'])->name('unlike');
+
+// Popup
+// Route::get('/compose/chit', [PostsController::class, 'show'])->middleware('auth');
 
 // Public Pages
 // Terms Of Service Page

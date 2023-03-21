@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -11,9 +11,11 @@ class ProfileController extends Controller
     {
         try {
             $user = User::where('name', $name)->firstOrFail();
-            return view('user.profile', ['user' => $user]);
+            $posts = Post::all();
+
+            return view('user.profile', ['user' => $user], ['posts' => $posts]);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return view('user.profile');
+            return view('user.profile', ['name' => $name]);
         }
     }
 }
