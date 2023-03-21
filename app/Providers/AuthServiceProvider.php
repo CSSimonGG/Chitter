@@ -3,11 +3,10 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
 use App\Contracts\Likeable;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -32,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
             }
 
             if ($user->hasLiked($likeable)) {
-                return Response::deny("Cannot like the same thing twice");
+                return Response::deny('Cannot like the same thing twice');
             }
 
             return Response::allow();
@@ -45,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
             }
 
             if (! $user->hasLiked($likeable)) {
-                return Response::deny("Cannot unlike without liking first");
+                return Response::deny('Cannot unlike without liking first');
             }
 
             return Response::allow();

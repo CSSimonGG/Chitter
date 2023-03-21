@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
@@ -23,11 +22,14 @@ class PostsController extends Controller
 
         return redirect('home');
     }
+
     public function show(Post $post)
     {
         $posts = Post::all();
+
         return view('home', ['posts' => $posts]);
     }
+
     public function destroy(Post $post)
     {
         // Make sure logged in user is owner
@@ -35,6 +37,7 @@ class PostsController extends Controller
             abort(403, 'Unauthorized Action');
         }
         $post->delete();
+
         return redirect('/');
     }
 }

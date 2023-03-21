@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -11,9 +10,11 @@ class HomeController extends Controller
     {
         return redirect('home');
     }
+
     public function index()
     {
         $posts = Post::all();
+
         return view('home', ['posts' => $posts]);
     }
 }

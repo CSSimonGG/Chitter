@@ -3,12 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Contracts\Likeable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Contracts\Likeable;
-use App\Models\Like;
 
 class User extends Authenticatable
 {
@@ -71,7 +70,7 @@ class User extends Authenticatable
         }
 
         $likeable->likes()
-            ->whereHas('user', fn($q) => $q->whereId($this->id))
+            ->whereHas('user', fn ($q) => $q->whereId($this->id))
             ->delete();
 
         return $this;
@@ -84,7 +83,7 @@ class User extends Authenticatable
         }
 
         return $likeable->likes()
-            ->whereHas('user', fn($q) =>  $q->whereId($this->id))
+            ->whereHas('user', fn ($q) => $q->whereId($this->id))
             ->exists();
     }
 }

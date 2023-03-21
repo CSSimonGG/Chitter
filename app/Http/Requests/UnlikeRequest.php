@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\LikeRequest;
-
 class UnlikeRequest extends LikeRequest
 {
     public function authorize()
@@ -11,4 +9,3 @@ class UnlikeRequest extends LikeRequest
         return $this->user()->can('unlike', $this->likeable());
     }
 }
-
