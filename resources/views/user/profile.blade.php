@@ -15,25 +15,32 @@
                 </div>
             </div>
             <div class="">
-                <ul class="flex font-medium">
-                    <li class="transition-all w-1/3 py-3 text-center hover:bg-gray-200">Tweets</li>
-                    <li class="transition-all w-1/3 py-3 text-center hover:bg-gray-200">Retweets</li>
-                    <li class="transition-all w-1/3 py-3 text-center hover:bg-gray-200">Likes</li>
-                </ul>
+                <nav id="nav">
+                    <ul class="flex font-medium">
+                        <li class="transition-all w-1/3 py-3 text-center hover:bg-gray-200">Tweets</li>
+                        <li class="transition-all w-1/3 py-3 text-center hover:bg-gray-200">Retweets</li>
+                        <li class="transition-all w-1/3 py-3 text-center hover:bg-gray-200">Likes</li>
+                    </ul>
+                </nav>
             </div>
             <div>
-                @foreach ($posts->sortByDesc('created_at') as $post)
-                    @if ($post->user_id == $user->id)
-                        <x-chit :post="$post" />
-                    @endif
-                @endforeach
-                <h1 class="border">Likes</h1>
-                {{-- #TODO sort by date when liked  --}}
-                @foreach ($posts->sortByDesc('created_at') as $post)
-                    @if ($post->likes->contains('user_id', Auth::user()->id))
-                        <x-chit :post="$post" />
-                    @endif
-                @endforeach
+                <section class="tweet-section" >
+                    @foreach ($posts->sortByDesc('created_at') as $post)
+                        @if ($post->user_id == $user->id)
+                            <x-chit :post="$post" />
+                        @endif
+                    @endforeach
+                </section>
+                <section class="retweet-section" style="display: none;">
+                </section>
+                <section class="like-section" style="display: none;">
+                    {{-- #TODO sort by date when liked  --}}
+                    @foreach ($posts->sortByDesc('created_at') as $post)
+                        @if ($post->likes->contains('user_id', $user->id))
+                            <x-chit :post="$post" />
+                        @endif
+                    @endforeach
+                </section>
             </div>
         </div>
     @else

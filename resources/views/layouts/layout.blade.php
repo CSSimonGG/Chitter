@@ -10,7 +10,7 @@
     @vite('resources/css/app.css')
     {{-- JS --}}
     <script src="{{ asset('js/app.js') }}"></script>
-    <!-- JQuere -->
+    {{-- Jquery --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{-- Title --}}
     <title>@yield('title') - Chitter</title>
@@ -175,13 +175,13 @@
         <div class="xl:col-span-4 max-xl:col-span-3 max-lg:hidden px-6">
             <div>
                 <footer class="text-gray-500 text-xs">
-                    <a href="tos">
+                    <a href="/tos">
                         <span class="pr-4">Terms of Service</span>
                     </a>
-                    <a href="privacy">
+                    <a href="/privacy">
                         <span class="pr-4">Privacy Policy</span>
                     </a>
-                    <a href="cookies">
+                    <a href="/cookies">
                         <span>Cookie Policy</span>
                     </a>
                     <h3>© 2023 Chitter, Simon de Klerk</h3>
@@ -191,6 +191,7 @@
         <script>
             $(function() {
                 console.log('Document ready2!');
+                // Like and Unlike functionality
                 $('.like-form, .unlike-form').on('submit', function(e) {
                     e.preventDefault();
                     var $form = $(this);
@@ -223,6 +224,13 @@
                             }
                         }
                     });
+                });
+                // Profile Sections
+                var sections = $("section");
+                $("#nav li").click(function() {
+                    var index = $(this).index();
+                    sections.not(":eq(" + index + ")").hide();
+                    sections.eq(index).show();
                 });
             });
         </script>
