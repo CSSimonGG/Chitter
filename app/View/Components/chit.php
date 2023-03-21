@@ -12,6 +12,7 @@ class chit extends Component
 
     /**
      * Create a new component instance.
+     * @param array $post
      */
     public function __construct($post)
     {

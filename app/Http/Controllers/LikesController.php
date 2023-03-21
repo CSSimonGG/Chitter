@@ -7,13 +7,13 @@ use App\Http\Requests\UnlikeRequest;
 
 class LikesController extends Controller
 {
-    public function like(LikeRequest $request)
+    public function like(LikeRequest $likeRequest)
     {
-        $request->user()->like($request->likeable());
+        $likeRequest->user()->like($likeRequest->likeable());
 
-        if ($request->ajax()) {
+        if ($likeRequest->ajax()) {
             return response()->json([
-                'likes' => $request->likeable()->likes()->count(),
+                'likes' => $likeRequest->likeable()->likes()->count(),
                 'liked' => true,
             ]);
         }

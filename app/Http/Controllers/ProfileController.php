@@ -9,13 +9,12 @@ class ProfileController extends Controller
 {
     public function show($name)
     {
-        try {
-            $user = User::where('name', $name)->firstOrFail();
-            $posts = Post::all();
-
-            return view('user.profile', ['user' => $user], ['posts' => $posts]);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        $user = User::where('name', $name)->first();
+        if(empty($user)){
             return view('user.profile', ['name' => $name]);
         }
+        
+        $posts = Post::all();
+        return view('user.profile', ['user' => $user], ['posts' => $posts]);
     }
 }
