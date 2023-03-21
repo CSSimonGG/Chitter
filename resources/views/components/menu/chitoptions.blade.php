@@ -2,7 +2,7 @@
     @props(['post'])
 
     @if (Auth::id() == $post->user_id)
-        <form method="POST" action="delete/{{$post->id}}">
+        <form method="POST" action="/delete/{{$post->id}}">
             @csrf
             @method('DELETE')
             <button class="text-red-500">{{--<i class="fa-solid fa-trash"></i>--}} Delete</button>

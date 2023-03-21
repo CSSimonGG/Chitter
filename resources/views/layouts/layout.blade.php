@@ -37,7 +37,7 @@
                     <a href="/home">
                         <div class="w-fit mt-1 hover:bg-red-100 ease-in-out duration-200 rounded-full">
                             <li class="p-3">
-                                <img class="w-8" src="redtwitterlogo.png" alt="Chitter">
+                                <img class="w-8" src="/redtwitterlogo.png" alt="Chitter">
                             </li>
                         </div>
                     </a>
