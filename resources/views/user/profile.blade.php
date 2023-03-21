@@ -14,6 +14,21 @@
                     Follow
                 </div>
             </div>
+            <div class="flex items-center text-gray-500 px-3 py-2">
+                <x-calander />
+                &nbsp
+                <span class="">{{ "Joined " . $user->created_at->diffForHumans() }}</span>
+            </div>
+            <div class="flex px-3 pb-6 ">
+                <div class="hover:underline">
+                    <span class="font-semibold">0</span>
+                    <span class="text-gray-500">Following</span>
+                </div>
+                <div class="pl-3 hover:underline">
+                    <span class="font-semibold">0</span>
+                    <span class="text-gray-500">Followers</span>
+                </div>
+            </div>
             <div class="">
                 <nav id="nav">
                     <ul class="flex font-medium">
@@ -24,7 +39,7 @@
                 </nav>
             </div>
             <div>
-                <section class="tweet-section" >
+                <section class="tweet-section">
                     @foreach ($posts->sortByDesc('created_at') as $post)
                         @if ($post->user_id == $user->id)
                             <x-chit :post="$post" />
