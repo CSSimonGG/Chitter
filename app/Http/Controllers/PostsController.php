@@ -15,6 +15,7 @@ class PostsController extends Controller
             $user_id = $user->id;
         }
 
+        // Create New Post
         $post = new Post();
         $post->user_id = $user_id;
         $post->chit = request('chit');
@@ -25,9 +26,10 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        $posts = Post::all();
+        // Load All Posts
+        $post = Post::all();
 
-        return view('home', ['posts' => $posts]);
+        return view('home', ['post' => $post]);
     }
 
     public function destroy(Post $post)
@@ -36,6 +38,7 @@ class PostsController extends Controller
         if ($post->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
+        // Delete Post
         $post->delete();
 
         return redirect('/');

@@ -1,6 +1,7 @@
 <div>
     @props(['post'])
 
+    {{-- If User Made Post Show Delete Button --}}
     @if (Auth::id() == $post->user_id)
         <form method="POST" action="/delete/{{$post->id}}">
             @csrf

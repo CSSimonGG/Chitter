@@ -1,3 +1,5 @@
+{{-- #TODO Cleanup --}}
+{{-- If Can Like Show Like --}}
 @if (auth()->check() &&
         auth()->user()->can('like', $model))
     <form id="like-form-{{ $model->id }}" class="like-form flex" action="{{ route('like') }}"
@@ -12,6 +14,7 @@
         </button>
         <span class="likes mt-2">{{ $model->likes()->count() }}</span>
     </form>
+{{--  Else If Can Unlike Show Unlike --}}
 @elseif(auth()->check() &&
         auth()->user()->can('unlike', $model))
     <form id="unlike-form-{{ $model->id }}" class="unlike-form flex" action="{{ route('unlike') }}"

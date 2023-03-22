@@ -9,12 +9,18 @@ class ProfileController extends Controller
 {
     public function show($name)
     {
+        // Check If User Exists
         $user = User::where('name', $name)->first();
-        if(empty($user)){
+        // If User Does Not Exist
+        if (empty($user)) {
+            // Return With Name
             return view('user.profile', ['name' => $name]);
         }
-        
+
+        // Load All Posts
         $posts = Post::all();
+
+        // Return With Name And Posts
         return view('user.profile', ['user' => $user], ['posts' => $posts]);
     }
 }

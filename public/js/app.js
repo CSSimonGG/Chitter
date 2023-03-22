@@ -1,4 +1,5 @@
 // import './bootstrap';
+// Popup Create New Post
 function showPopupMenu() {
     var popupMenu = document.getElementById("popupMenu");
     if (popupMenu.style.display === "none") {
@@ -15,6 +16,7 @@ function closePopupMenu() {
     showPopupMenu();
 }
 
+// Popup Post Options
 function showChitOptions(id) {
     var chitOptions = document.getElementById("chitOptions_" + id);
     console.log(id);
@@ -25,6 +27,7 @@ function showChitOptions(id) {
     }
 }
 
+// Popup Profile Options
 function showProfileMenu() {
     var popupMenu = document.getElementById("profileMenu");
     if (popupMenu.style.display === "none") {

@@ -13,6 +13,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        // Load All Posts
         $posts = Post::all();
 
         return view('home', ['posts' => $posts]);

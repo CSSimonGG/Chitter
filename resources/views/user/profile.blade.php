@@ -4,10 +4,12 @@
 
 @section('content')
 
+    {{-- If User Exists Show Users Profile Page --}}
     @if (isset($user))
         <div class="">
             <div class="relative">
                 <div class="flex px-3 py-6">
+                    {{-- Username --}}
                     <h1 class="font-bold">{{ Str::limit($user->name, 50, $end = '...') }}</h1>
                 </div>
                 <div class="absolute right-0 top-0 p-6">
@@ -17,6 +19,7 @@
             <div class="flex items-center text-gray-500 px-3 py-2">
                 <x-calander />
                 &nbsp
+                {{-- Date User Joined --}}
                 <span class="">{{ "Joined " . $user->created_at->diffForHumans() }}</span>
             </div>
             <div class="flex px-3 pb-6 ">
@@ -30,6 +33,7 @@
                 </div>
             </div>
             <div class="">
+                {{-- Profile Nav --}}
                 <nav id="nav">
                     <ul class="flex font-medium">
                         <li class="transition-all w-1/3 py-3 text-center hover:bg-gray-200">Tweets</li>
@@ -39,6 +43,7 @@
                 </nav>
             </div>
             <div>
+                {{-- Display Users Tweets --}}
                 <section class="tweet-section">
                     @foreach ($posts->sortByDesc('created_at') as $post)
                         @if ($post->user_id == $user->id)
@@ -47,9 +52,11 @@
                     @endforeach
                 </section>
                 <section class="retweet-section" style="display: none;">
+                    {{-- Displays User Retweets --}}
                 </section>
                 <section class="like-section" style="display: none;">
                     {{-- #TODO sort by date when liked  --}}
+                    {{-- Display Users Likes --}}
                     @foreach ($posts->sortByDesc('created_at') as $post)
                         @if ($post->likes->contains('user_id', $user->id))
                             <x-chit :post="$post" />
@@ -58,6 +65,7 @@
                 </section>
             </div>
         </div>
+    {{-- If Username Does Not Exist Show Error Page --}}
     @else
         <div class="px-3">
             <div>

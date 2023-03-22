@@ -11,6 +11,7 @@ class LikesController extends Controller
     {
         $likeRequest->user()->like($likeRequest->likeable());
 
+        // Return Like
         if ($likeRequest->ajax()) {
             return response()->json([
                 'likes' => $likeRequest->likeable()->likes()->count(),
@@ -19,13 +20,14 @@ class LikesController extends Controller
         }
     }
 
-    public function unlike(UnlikeRequest $request)
+    public function unlike(UnlikeRequest $unlikerequest)
     {
-        $request->user()->unlike($request->likeable());
+        $unlikerequest->user()->unlike($unlikerequest->likeable());
 
-        if ($request->ajax()) {
+        // Return Unlike
+        if ($unlikerequest->ajax()) {
             return response()->json([
-                'likes' => $request->likeable()->likes()->count(),
+                'likes' => $unlikerequest->likeable()->likes()->count(),
                 'liked' => false,
             ]);
         }
