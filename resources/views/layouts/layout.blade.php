@@ -34,6 +34,7 @@
         <header class="xl:col-span-4 max-xl:col-span-1 max-lg:col-span-2 max-md:hidden xl:px-6">
             <nav class="flex justify-end">
                 <ul class="text-start max-xl:mr-4">
+                    {{-- Logo --}}
                     <a href="/home">
                         <div class="w-fit mt-1 hover:bg-red-100 ease-in-out duration-200 rounded-full">
                             <li class="p-3">
@@ -41,6 +42,7 @@
                             </li>
                         </div>
                     </a>
+                    {{-- Nav Home --}}
                     <a href="/home">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
@@ -57,6 +59,7 @@
                             </li>
                         </div>
                     </a>
+                    {{-- Nav Explore --}}
                     <a href="/explore">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
@@ -73,6 +76,7 @@
                             </li>
                         </div>
                     </a>
+                    {{-- Nav Notifications --}}
                     <a href="/notifications">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
@@ -89,6 +93,7 @@
                             </li>
                         </div>
                     </a>
+                    {{-- Nav Messages --}}
                     <a href="/messages">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
@@ -105,6 +110,7 @@
                             </li>
                         </div>
                     </a>
+                    {{-- Nav Bookmarks --}}
                     <a href="/bookmarks">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
@@ -121,6 +127,7 @@
                             </li>
                         </div>
                     </a>
+                    {{-- Nav Profile --}}
                     <a href="{{ url('/user/' . urlencode(Auth::user()->name)) }}">
                         <div class="w-fit hover:bg-gray-200 ease-in-out duration-200 rounded-full">
                             <li class="p-3 xl:pr-6 my-2 text-xl">
@@ -137,6 +144,7 @@
                             </li>
                         </div>
                     </a>
+                    {{-- Create Chit Popup Button --}}
                     <div onclick="showPopupMenu()">
                         <div class="max-xl:hidden text-center rounded-full bg-red-500 hover:bg-red-600">
                             <li class="px-20 py-3 mt-6 text-xl text-white font-medium">Chit</li>
@@ -153,28 +161,39 @@
                             </li>
                         </div>
                     </div>
-                    <div class="w-fit">
-                        <li
-                            class="px-6 py-2 xl:pr-6 absolute bottom-0 hover:bg-gray-200 ease-in-out duration-200 rounded-full">
-                            <a class="text-lg font-semibold"
-                                href="{{ url('/user/' . urlencode(Auth::user()->name)) }}">{{ Str::limit(Auth::user()->name, 20, $end = '...') }}</a>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit">
-                                    <p class="text-red-600">Sign Out</p>
-                                </button>
-                            </form>
+                    {{-- Nav User --}}
+                    <div class="pb-2">
+                        <li class="">
+                            <span
+                                class="w-fit flex items-center px-6 py-2 xl:pr-6 absolute bottom-2 hover:bg-gray-200 ease-in-out duration-200 rounded-full">
+                                <a class="max-xl:hidden text-lg font-semibold"
+                                    href="{{ url('/user/' . urlencode(Auth::user()->name)) }}">{{ Str::limit(Auth::user()->name, 20, $end = '...') }}</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="" onclick="showProfileMenu()">
+                                    <x-buttons.options />
+                                </span>
+                            </span>
+                            <span id="profileMenu" style="display: none;" class="border-2 px-6 py-2 text-center rounded-full absolute bottom-14">
+                                <form action="{{ route('logout') }}" method="POST" class="">
+                                    @csrf
+                                    <button type="submit">
+                                        <p class="text-red-600">Sign Out</p>
+                                    </button>
+                                </form>
+                            </span>
                         </li>
                     </div>
                 </ul>
             </nav>
         </header>
         <main class="xl:col-span-4 max-xl:col-span-8 max-lg:col-span-10 max-lg:pr-8 border-x-2">
+            {{-- Get Content for Main --}}
             @yield('content')
         </main>
         <div class="xl:col-span-4 max-xl:col-span-3 max-lg:hidden px-6">
             <div>
                 <footer class="text-gray-500 text-xs">
+                    {{-- Policy Pages --}}
                     <a href="/tos">
                         <span class="pr-4">Terms of Service</span>
                     </a>
@@ -184,10 +203,17 @@
                     <a href="/cookies">
                         <span>Cookie Policy</span>
                     </a>
+                    {{-- Copyright --}}
                     <h3>© 2023 Chitter, Simon de Klerk</h3>
                 </footer>
             </div>
         </div>
+
+        {{-- Ajax --}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+
+    
         <script>
             $(function() {
                 console.log('Document ready2!');

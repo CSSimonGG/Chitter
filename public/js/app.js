@@ -24,3 +24,12 @@ function showChitOptions(id) {
         chitOptions.style.display = "none";
     }
 }
+
+function showProfileMenu() {
+    var popupMenu = document.getElementById("profileMenu");
+    if (popupMenu.style.display === "none") {
+        popupMenu.style.display = "block";
+    } else {
+        popupMenu.style.display = "none";
+    }
+}
